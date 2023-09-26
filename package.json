@@ -23,6 +23,7 @@
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.8",
 		"prettier-plugin-svelte": "^2.10.1",
+		"prettier-plugin-tailwindcss": "^0.4.1",
 		"svelte": "^4.2.1",
 		"svelte-check": "^3.5.2",
 		"tailwindcss": "^3.3.3",
@@ -33,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"date-fns": "^2.30.0",
+		"ics": "^3.5.0",
 		"valibot": "^0.17.1"
 	}
 }
