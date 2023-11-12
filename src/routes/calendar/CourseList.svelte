@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { navigating, page } from '$app/stores';
-	import { Loader2 } from 'lucide-svelte';
 	import type { Writable } from 'svelte/store';
-	import { fade } from 'svelte/transition';
 
 	export let name: string;
 	export let courses: string[];
@@ -37,12 +34,6 @@
 			<span>
 				{name}
 			</span>
-
-			{#if $navigating?.from?.route?.id === $page.route.id}
-				<div transition:fade={{ duration: 50 }}>
-					<Loader2 class="animate-spin"></Loader2>
-				</div>
-			{/if}
 		</div>
 	</h2>
 
