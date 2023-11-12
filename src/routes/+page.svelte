@@ -1,8 +1,3 @@
-<script lang="ts">
-	import { Mail } from 'lucide-svelte';
-	import GitHub from '../components/icons/GitHub.svelte';
-</script>
-
 <div class="prose mx-auto py-12 dark:prose-invert">
 	<enhanced:img alt="Matse Logo" src="../assets/matse_ausbildung.png?w=640" />
 
