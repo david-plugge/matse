@@ -4,11 +4,14 @@ import { parseSemesterString } from '../api/stundenplan/semester.js';
 export const load = async ({ url }) => {
 	const { semester, year } = parseSemesterString(url.searchParams.get('semester'));
 
-	const events = await getEventNames(semester === 'winter', year);
-
 	return {
 		semester: `${year}-${semester}`,
-		events,
+		lazy: {
+			events: Promise.all([
+				getEventNames(semester === 'winter', year),
+				new Promise((res) => setTimeout(res, 500))
+			]).then(([events]) => events)
+		},
 		selectedCourses: url.searchParams.getAll('courses')
 	};
 };

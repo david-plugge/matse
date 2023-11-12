@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
 	import CourseList from './CourseList.svelte';
-	import { Share2, Copy, Check, X } from 'lucide-svelte';
+	import { Share2, Copy, Check, X, Loader } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { submitNearestForm } from '$lib/utils';
 	import { getCurrentSemester } from '../api/stundenplan/semester';
@@ -99,11 +99,23 @@
 		</div>
 	</form>
 
-	<div class="grid gap-4 py-8 xl:grid-cols-2">
-		{#each Object.entries(data.events) as [name, courses]}
-			<CourseList {name} {courses} {selectedCourses}></CourseList>
-		{/each}
-	</div>
+	{#await data.lazy.events}
+		<div class="grid gap-4 py-8 xl:grid-cols-2">
+			{#each { length: 4 } as _}
+				<div class="bg-surface-300-600-token h-48 animate-pulse rounded-lg"></div>
+			{/each}
+		</div>
+	{:then events}
+		<div class="grid gap-4 py-8 xl:grid-cols-2">
+			{#each Object.entries(events) as [name, courses]}
+				<CourseList {name} {courses} {selectedCourses}></CourseList>
+			{/each}
+		</div>
+	{:catch}
+		<div class="variant-soft-error">
+			Es ist ein Fehler aufgetreten, bitte versuch es später erneut.
+		</div>
+	{/await}
 
 	<div
 		class="bg-surface-200-700-token border-surface-400-500-token mt-4 flex w-full items-center overflow-hidden rounded-full border"
