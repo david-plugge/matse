@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 import { join } from 'node:path';
 
@@ -18,10 +19,11 @@ const config: Config = {
 	plugins: [
 		skeleton({
 			themes: {
-				preset: ['wintry']
+				preset: ['skeleton', 'wintry']
 			}
 		}),
-		typography
+		typography,
+		forms
 	]
 };
 
