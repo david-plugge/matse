@@ -1,5 +1,5 @@
-import { getEventNames } from '../api/stundenplan/calender.js';
-import { parseSemesterString } from '../api/stundenplan/semester.js';
+import { getEventNames } from '../api/calendar/calendar.js';
+import { parseSemesterString } from '../api/calendar/semester.js';
 
 export const load = async ({ url }) => {
 	const { semester, year } = parseSemesterString(url.searchParams.get('semester'));

@@ -4,7 +4,7 @@
 	import { Share2, Copy, Check, X, Loader } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { submitNearestForm } from '$lib/utils';
-	import { getCurrentSemester } from '../api/stundenplan/semester';
+	import { getCurrentSemester } from '../api/calendar/semester';
 	import { createCopyButton } from '$lib/copy';
 
 	export let data;

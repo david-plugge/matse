@@ -33,10 +33,9 @@
 					class:bg-surface-200-700-token={$page.url.pathname.startsWith('/links')}>Links</a
 				>
 				<a
-					href="/stundenplan"
+					href="/calendar"
 					class="rounded-lg px-4 py-2 font-medium"
-					class:bg-surface-200-700-token={$page.url.pathname.startsWith('/stundenplan')}
-					>Stundenplan</a
+					class:bg-surface-200-700-token={$page.url.pathname.startsWith('/calendar')}>Stundenplan</a
 				>
 			</nav>
 
@@ -68,9 +67,9 @@
 				<Link />
 			</a>
 			<a
-				href="/stundenplan"
+				href="/calendar"
 				class="rounded-lg px-4 py-3 font-medium"
-				class:bg-surface-300-600-token={$page.url.pathname.startsWith('/stundenplan')}
+				class:bg-surface-300-600-token={$page.url.pathname.startsWith('/calendar')}
 				title="Stundenplan"
 			>
 				<Calendar />

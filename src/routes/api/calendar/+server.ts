@@ -1,4 +1,4 @@
-import { getAllEvents } from './calender.js';
+import { getAllEvents } from './calendar.js';
 import { formatDateToICSDate, formatDateToICSDateTime, formatText } from './ics.js';
 import { parseSemesterString } from './semester.js';
 
