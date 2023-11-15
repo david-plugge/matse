@@ -1,4 +1,4 @@
-import { addHours, format } from 'date-fns';
+import { format } from 'date-fns';
 import * as v from 'valibot';
 
 function parseEventStringBoolean(input: unknown) {
@@ -8,7 +8,7 @@ const DATE_REGEX =
 	/^\d{4}-(?:0[1-9]|1[0-2])-(?:[12]\d|0[1-9]|3[01])T(?:0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/u;
 
 function parseEventStringDate(input: string) {
-	return addHours(new Date(input + 'Z'), -2);
+	return new Date(input);
 }
 
 const calenderEventSchema = v.object({
