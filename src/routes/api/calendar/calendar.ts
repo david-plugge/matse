@@ -1,18 +1,21 @@
-import { format } from 'date-fns';
+import { addHours, format } from 'date-fns';
 import * as v from 'valibot';
 
 function parseEventStringBoolean(input: unknown) {
 	return input !== '0' && input !== '' && typeof input !== 'undefined';
 }
-
 const DATE_REGEX =
 	/^\d{4}-(?:0[1-9]|1[0-2])-(?:[12]\d|0[1-9]|3[01])T(?:0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/u;
+
+function parseEventStringDate(input: string) {
+	return addHours(new Date(input + 'Z'), -2);
+}
 
 const calenderEventSchema = v.object({
 	title: v.string(),
 	name: v.string(),
-	start: v.transform(v.string([v.regex(DATE_REGEX)]), (input) => new Date(input)),
-	end: v.transform(v.string([v.regex(DATE_REGEX)]), (input) => new Date(input)),
+	start: v.transform(v.string([v.regex(DATE_REGEX)]), parseEventStringDate),
+	end: v.transform(v.string([v.regex(DATE_REGEX)]), parseEventStringDate),
 	location: v.object({
 		name: v.string(),
 		street: v.string(),
@@ -49,6 +52,8 @@ export async function getEventNames(winter: boolean, year: number) {
 
 	for (let i = 0; i < ACADEMIC_YEAR_NAMES.length; i++) {
 		const e = await getAcademicYearEvents(winter, year, i + 1);
+
+		// if (i === 0) console.log(e.slice(40, 50));
 
 		events[ACADEMIC_YEAR_NAMES[i]] = [
 			...new Set(e.filter((e) => !e.isHoliday).map((e) => e.name.replace(/^\(!\)\s+/, '')))
