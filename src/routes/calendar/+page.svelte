@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
-	import CourseList from './CourseList.svelte';
-	import { Share2, Copy, Check, X, Loader } from 'lucide-svelte';
+	import { Share2, Copy, Check, X } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { submitNearestForm } from '$lib/utils';
-	import { getCurrentSemester } from '../api/calendar/semester';
 	import { createCopyButton } from '$lib/copy';
+	import { getCurrentSemester } from '../api/calendar/semester';
+	import CourseList from './CourseList.svelte';
 
 	export let data;
 
@@ -16,7 +16,7 @@
 	const copyCalenderUrl = createCopyButton(getCalendarUrl);
 
 	function getShareUrl() {
-		const url = new URL('/stundenplan', $page.url.origin);
+		const url = new URL('/calendar', $page.url.origin);
 		url.searchParams.set('semester', data.semester);
 
 		for (const course of $selectedCourses) {
@@ -27,7 +27,7 @@
 	}
 
 	function getCalendarUrl() {
-		const url = new URL('/api/stundenplan', $page.url.origin);
+		const url = new URL('/api/calendar', $page.url.origin);
 		url.searchParams.set('semester', data.semester);
 
 		for (const course of $selectedCourses) {
