@@ -22,7 +22,7 @@ export const GET = async ({ url }) => {
 
 			return [
 				'BEGIN:VEVENT',
-				`UID:${start}-${e.name.toLowerCase().replace(/\s+/, '_')}@matse.davidplugge.de`,
+				`UID:${start}-${e.name.toLowerCase().replace(/\s+/g, '_')}@matse.davidplugge.de`,
 				`DTSTAMP:${creationTimestamp}`,
 				e.allDay ? `DTSTART;VALUE=DATE:${formatDateToICSDate(e.start)}` : `DTSTART:${start}`,
 				!e.allDay && `DTEND:${formatDateToICSDateTime(e.end)}`,
