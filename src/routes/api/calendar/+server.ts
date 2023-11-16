@@ -2,14 +2,12 @@ import { getAllEvents } from './calendar.js';
 import { formatDateToICSDate, formatDateToICSDateTime, formatText } from './ics.js';
 import { parseSemesterString } from './semester.js';
 
-// http://localhost:5173/api/stundenplan?semester=winter&year=2023&courses=Algorithmen&courses=Analysis+2&courses=BeginnerMeeting&courses=Einf%C3%BChrung+in+die+MATSE-Dienste&courses=Erstievent&courses=Java-Blockkurs&courses=Klausureinsicht&courses=Lineare+Algebra+2&courses=Mathematische+Grundlagen&courses=Siegerehrung+MATSE+Rallye&courses=Theoretische+Informatik&courses=Tutorium+Java&courses=Tutorium+Mathematik+-+Analysis+1&courses=Tutorium+Mathematik+-+Analysis+2&courses=Wahlmodulvorstellung&courses=%C3%9Cbung+1.+Lehrjahr
 export const GET = async ({ url }) => {
 	const { year, semester } = parseSemesterString(url.searchParams.get('semester'));
 	const courses = url.searchParams.getAll('courses');
 
-	const events = await getAllEvents(semester === 'winter', year).then((events) =>
-		events.filter((e) => courses.includes(e.name))
-	);
+	const allEvents = await getAllEvents(semester === 'winter', year);
+	const events = allEvents.filter((e) => courses.includes(e.name));
 
 	const creationTimestamp = formatDateToICSDateTime(new Date());
 

@@ -54,8 +54,6 @@ export async function getEventNames(winter: boolean, year: number) {
 	for (let i = 0; i < ACADEMIC_YEAR_NAMES.length; i++) {
 		const e = await getAcademicYearEvents(winter, year, i + 1);
 
-		// if (i === 0) console.log(e.slice(40, 50));
-
 		events[ACADEMIC_YEAR_NAMES[i]] = [
 			...new Set(e.filter((e) => !e.isHoliday).map((e) => e.name.replace(/^\(!\)\s+/, '')))
 		].sort();
