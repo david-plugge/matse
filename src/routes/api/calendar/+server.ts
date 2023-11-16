@@ -17,6 +17,8 @@ export const GET = async ({ url }) => {
 		'BEGIN:VCALENDAR',
 		'VERSION:2.0',
 		`PRODID:-//davidplugge/calender/matse`,
+		'X-WR-CALNAME:Matse Stundenplan',
+		'NAME:Matse Stundenplan',
 		...events.flatMap((e) => {
 			const start = formatDateToICSDateTime(e.start);
 
