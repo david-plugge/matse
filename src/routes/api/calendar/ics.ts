@@ -1,3 +1,22 @@
+export function parseDateWithTimeZone(dateString: string, timeZone: string) {
+	const date = new Date(dateString.replace(/Z?$/, 'Z'));
+	const parts = ['year', 'month', 'day', 'hour', 'minute', 'second'] as const;
+
+	const f = new Intl.DateTimeFormat(undefined, {
+		...parts.reduce((p, v) => ({ ...p, [v]: 'numeric' }), {}),
+		hour12: false,
+		timeZone
+	})
+		.formatToParts(date)
+		.reduce((p, v) => ({ ...p, [v.type]: v.value }), {} as Record<(typeof parts)[number], number>);
+
+	return new Date(
+		date.getTime() +
+			date.getTime() -
+			Date.UTC(f.year, f.month - 1, f.day, f.hour, f.minute, f.second, date.getUTCMilliseconds())
+	);
+}
+
 function pad(input: number, len: number) {
 	return input.toString().padStart(len, '0');
 }

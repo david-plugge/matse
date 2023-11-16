@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import * as v from 'valibot';
+import { parseDateWithTimeZone } from './ics';
 
 function parseEventStringBoolean(input: unknown) {
 	return input !== '0' && input !== '' && typeof input !== 'undefined';
@@ -8,7 +9,7 @@ const DATE_REGEX =
 	/^\d{4}-(?:0[1-9]|1[0-2])-(?:[12]\d|0[1-9]|3[01])T(?:0\d|1\d|2[0-3]):[0-5]\d:[0-5]\d$/u;
 
 function parseEventStringDate(input: string) {
-	return new Date(input);
+	return parseDateWithTimeZone(input, 'Europe/Berlin');
 }
 
 const calenderEventSchema = v.object({
